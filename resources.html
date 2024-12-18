@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Resources - Animal Care Hospital</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/font-awesome.css">
+  <style>
+    body {
+      background-color: var(--body-bg-color);
+      color: var(--black-70);
+    }
+
+    .resources-section {
+      padding: 120px 0 60px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      color: var(--main-color);
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+
+    .section-title p {
+      font-size: 40px;
+      font-weight: 600;
+      color: var(--black-90);
+      text-transform: capitalize;
+    }
+
+    .resources-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1170px;
+      margin: 0 auto;
+    }
+
+    .resource-category {
+      background-color: var(--white-alpha-40);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px var(--shadow-color);
+    }
+
+    .resource-category h3 {
+      color: var(--main-color);
+      margin-bottom: 15px;
+    }
+
+    .resource-category ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .resource-category li a {
+      display: block;
+      color: var(--black-70);
+      text-decoration: none;
+      padding: 5px 0;
+      transition: color 0.3s ease;
+    }
+
+    .resource-category li a:hover {
+      color: var(--main-color);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .resources-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-main">
+        <div class="logo">
+          <a href="index.html"><img src="img/logo.png" alt="logo"> Animal Care Hospital</a>
+        </div>
+        <button type="button" class="nav-toggler js-nav-toggler">
+          <span></span>
+        </button>
+        <nav class="nav js-nav">
+          <ul>
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="coupons.html">Coupons</a></li>
+            <li><a href="resources.html">Resources</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+    <!-- Light/Dark Mode Switcher -->
+    <button type="button" class="switcher-btn js-switcher-btn">
+        <i class="fas fa-moon"></i>
+      </button>
+  
+  <!-- Resources Section -->
+  <section class="resources-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Resources</h2>
+        <p>Helpful Information for Pet Owners</p>
+      </div>
+      <div class="resources-container">
+        <!-- Pet Resources -->
+        <div class="resource-category">
+          <h3>Pet Resources</h3>
+          <ul>
+            <li><a href="#">Activities for Kids</a></li>
+            <li><a href="#">American Veterinary Medical Association</a></li>
+            <li><a href="#">Centers for Disease Control and Prevention</a></li>
+            <li><a href="#">DogTime.com</a></li>
+            <li><a href="#">PetPlace.com</a></li>
+          </ul>
+        </div>
+        <!-- Diseases -->
+        <div class="resource-category">
+          <h3>Common Diseases</h3>
+          <ul>
+            <li><a href="#">Allergic Dermatitis</a></li>
+            <li><a href="#">Arthritis</a></li>
+            <li><a href="#">Bladder Stones</a></li>
+            <li><a href="#">Cushing's Disease</a></li>
+            <li><a href="#">Dental Disease</a></li>
+          </ul>
+        </div>
+        <!-- Health & Care -->
+        <div class="resource-category">
+          <h3>Health & Care</h3>
+          <ul>
+            <li><a href="#">Flea Prevention</a></li>
+            <li><a href="#">Vaccinations</a></li>
+            <li><a href="#">Nutritional Guidance</a></li>
+            <li><a href="#">Spaying & Neutering</a></li>
+            <li><a href="#">Exercise & Wellness</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Careers Section -->
+<section class="careers-section">
+    <div class="container">
+      <div class="section-title" id="careers">
+        <h2>Careers</h2>
+        <p>Join Our Team</p>
+      </div>
+      <div class="careers-content">
+        <p>
+          We’re always looking for passionate and dedicated professionals to join our team. We are currently hiring:
+        </p> <br>
+        <ul>
+          <li><strong>Veterinarians</strong> (DVM required, 24 months experience)</li>
+          <p>Perform veterinarian services, including elective surgeries; advise pet owners; diagnostic tests such as blood; examinations.</p> <br>
+          <li><strong>Veterinary Nurses</strong></li>
+          <p>Assist veterinarians with patient care, administer treatments, monitor animals, and ensure clinic operations run smoothly.</p><br>
+        </ul>
+        <p>
+          If you’re interested in joining our compassionate team, please <a href="#contact">contact us</a> or send your resume to 
+          <a href="mailto:careers@animalcarehospital.com">careers@animalcarehospital.com</a>.
+        </p>
+        <br><br>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="footer-item">
+            <h3>Payment Methods</h3>
+            <ul>
+              <li>Visa, American Express,</li>
+              <li>Discover, MasterCard,</li>
+              <li>Care Credit</li>
+            </ul>
+          </div>
+          <div class="footer-item">
+            <h3>Information</h3>
+            <ul>
+              <li><a href="#">Resources</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="https://www.facebook.com/animalcarelivonia/" target="_blank" >Facebook</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js" defer></script>
+
+</body>
+</html>

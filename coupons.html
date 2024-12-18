@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Coupons - Animal Care Hospital</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/font-awesome.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      background-color: var(--body-bg-color);
+      color: var(--black-70);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .coupon-section {
+      padding: 120px 0 60px; /* Increased top padding */
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      color: var(--main-color);
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+
+    .section-title p {
+      font-size: 40px;
+      font-weight: 600;
+      color: var(--black-90);
+      text-transform: capitalize;
+    }
+
+    .coupon-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1170px;
+      margin: 0 auto;
+    }
+
+    .coupon {
+      background-color: var(--white-alpha-40);
+      border: 2px dashed var(--main-color);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px var(--shadow-color);
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .coupon h3 {
+      margin-bottom: 10px;
+      color: var(--main-color);
+      font-size: 20px;
+    }
+
+    .coupon p {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .coupon .price {
+      font-size: 18px;
+      color: var(--light-red);
+      font-weight: bold;
+    }
+
+    .coupon .expiry {
+      margin-top: 5px;
+      font-size: 12px;
+      color: var(--black-70);
+    }
+
+    body.dark .coupon {
+      background-color: var(--white-alpha-40);
+      color: var(--black-90);
+      border-color: var(--light-yellow);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-main">
+        <div class="logo">
+          <a href="index.html"><img src="img/logo.png" alt="logo"> Animal Care Hospital</a>
+        </div>
+        <button type="button" class="nav-toggler js-nav-toggler">
+          <span></span>
+        </button>
+        <nav class="nav js-nav">
+          <ul>
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="coupons.html">Coupons</a></li>
+            <li><a href="resources.html">Resources</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Light/Dark Mode Switcher -->
+  <button type="button" class="switcher-btn js-switcher-btn">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <!-- Coupons Section -->
+  <section class="coupon-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Coupons</h2>
+        <p>Present These During Your Visit</p>
+      </div>
+      <div id="coupons" class="coupon-container"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="footer-item">
+            <h3>Payment Methods</h3>
+            <ul>
+              <li>Visa, American Express,</li>
+              <li>Discover, MasterCard,</li>
+              <li>Care Credit</li>
+            </ul>
+          </div>
+          <div class="footer-item">
+            <h3>Information</h3>
+            <ul>
+              <li><a href="#">Resources</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="https://www.facebook.com/animalcarelivonia/" target="_blank" >Facebook</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Fetch Coupons from Google Sheets
+    async function fetchCoupons() {
+      const aliali = "AIzaSyBFULY2u7F5itXSMbcZn2KvjD_fy9ZDeNE";
+      const sheetId = "1uI_STDIMrFibUrnk4CNCuGYuOC6fCeXyEWGgZ2stsgA"; // Replace with your sheet ID
+      const sheetRange = "Sheet1";
+  
+      try {
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetRange}?key=${aliali}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        const rows = data.values.slice(1);
+        const container = document.getElementById("coupons");
+  
+        rows.forEach((row) => {
+          const [title, description, price, expiry] = row;
+          const couponDiv = document.createElement("div");
+          couponDiv.classList.add("coupon");
+          couponDiv.innerHTML = `
+            <h3>${title}</h3>
+            <p>${description}</p>
+            <div class="price">Price: ${price}</div>
+            <div class="expiry">Expires: ${expiry}</div>
+          `;
+          container.appendChild(couponDiv);
+        });
+      } catch (error) {
+        console.error("Error fetching coupon data:", error);
+      }
+    }
+  
+    document.addEventListener("DOMContentLoaded", fetchCoupons);
+  </script>
+  <!-- Load script.js here as a final fallback -->
+  <script src="js/script.js" defer></script>
+  
+</body>
+</html>
