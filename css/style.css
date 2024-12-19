@@ -51,6 +51,7 @@
   --border-color-1: hsl(42, 45%, 73%);
   --border-color-2: hsla(44, 45%, 73%, 0.4);
   --shadow-color: hsl(42, 45%, 73%);
+  --disabled-text:rgb(159, 151, 151);
 }
 
 
@@ -63,6 +64,7 @@ body.dark{
   --border-color-1: hsla(0, 0%, 100%, 0.12);
   --border-color-2: hsla(0, 0%, 100%, 0.05);
   --shadow-color: hsla(0, 0%, 0%, 0.15);
+  --disabled-text:rgba(255, 255, 255, 0.324);
 }
 
 
@@ -218,6 +220,37 @@ ul{
 .btn:hover::before,
 .btn:hover::after{
   animation: spin 2s linear infinite;
+}
+
+/* Dropdown Styling */
+.input-control {
+  display: block;
+  width: 100%;
+  height: 42px;
+  background-color: var(--body-bg-color); /* Matches form background */
+  border: 1px solid var(--border-color-1); /* Adds a visible border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 8px; /* Inner padding for better spacing */
+  font-size: 16px;
+  color: var(--black-70); /* Text color */
+  appearance: none; /* Removes default browser styles */
+}
+
+.input-control:focus {
+  outline: none; /* Removes default focus outline */
+  border-color: var(--main-color); /* Highlight border on focus */
+  box-shadow: 0 0 5px var(--main-color); /* Adds a subtle focus glow */
+}
+
+select.input-control option {
+  background-color: var(--body-bg-color); /* Matches the dropdown background */
+  color: var(--black-90); /* Text color */
+  padding: 5px; /* Adds spacing within options */
+}
+
+select.input-control option:disabled {
+  color: var(--disabled-text); /* Disabled text is less prominent */
+  background-color: var(--body-bg-color); /* Subtle background for disabled */
 }
 
 /* 09. = forms */
