@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Coupons - Animal Care Hospital</title>
   <meta charset="utf-8">
@@ -14,7 +15,8 @@
     }
 
     .coupon-section {
-      padding: 120px 0 60px; /* Increased top padding */
+      padding: 120px 0 60px;
+      /* Increased top padding */
     }
 
     .section-title {
@@ -51,6 +53,8 @@
       box-shadow: 0 0 10px var(--shadow-color);
       text-align: center;
       transition: background-color 0.3s ease;
+      position: relative;
+      /* Add this line */
     }
 
     .coupon h3 {
@@ -81,8 +85,37 @@
       color: var(--black-90);
       border-color: var(--light-yellow);
     }
+
+    .coupon input[type="checkbox"] {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      transform: scale(1.2);
+    }
+
+    .print-button {
+      display: block;
+      margin: 30px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: var(--main-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .print-container {
+      display: none;
+    }
+
+    .print-container .coupon {
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
+
 <body>
   <!-- Header -->
   <header class="header">
@@ -107,7 +140,7 @@
       </div>
     </div>
   </header>
-  
+
   <!-- Light/Dark Mode Switcher -->
   <button type="button" class="switcher-btn js-switcher-btn">
     <i class="fas fa-moon"></i>
@@ -121,6 +154,7 @@
         <p>Present These During Your Visit</p>
       </div>
       <div id="coupons" class="coupon-container"></div>
+      <button class="print-button" onclick="printSelectedCoupons()">Print Selected Coupons</button>
     </div>
   </section>
 
@@ -142,7 +176,7 @@
             <ul>
               <li><a href="#">Resources</a></li>
               <li><a href="#">Careers</a></li>
-              <li><a href="https://www.facebook.com/animalcarelivonia/" target="_blank" >Facebook</a></li>
+              <li><a href="https://www.facebook.com/animalcarelivonia/" target="_blank">Facebook</a></li>
             </ul>
           </div>
         </div>
@@ -150,25 +184,27 @@
     </div>
   </footer>
 
+  <div id="printArea" class="print-container"></div>
+
   <script>
-    // Fetch Coupons from Google Sheets
     async function fetchCoupons() {
       const aliali = "AIzaSyBFULY2u7F5itXSMbcZn2KvjD_fy9ZDeNE";
-      const sheetId = "1uI_STDIMrFibUrnk4CNCuGYuOC6fCeXyEWGgZ2stsgA"; // Replace with your sheet ID
+      const sheetId = "1uI_STDIMrFibUrnk4CNCuGYuOC6fCeXyEWGgZ2stsgA";
       const sheetRange = "Sheet1";
-  
+
       try {
         const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetRange}?key=${aliali}`;
         const response = await fetch(url);
         const data = await response.json();
         const rows = data.values.slice(1);
         const container = document.getElementById("coupons");
-  
+
         rows.forEach((row) => {
           const [title, description, price, expiry] = row;
           const couponDiv = document.createElement("div");
           couponDiv.classList.add("coupon");
           couponDiv.innerHTML = `
+            <input type="checkbox">
             <h3>${title}</h3>
             <p>${description}</p>
             <div class="price">Price: ${price}</div>
@@ -180,11 +216,32 @@
         console.error("Error fetching coupon data:", error);
       }
     }
-  
+
+    function printSelectedCoupons() {
+      const selectedCoupons = document.querySelectorAll(".coupon input[type='checkbox']:checked");
+      const printContainer = document.getElementById("printArea");
+      printContainer.innerHTML = ""; // Clear previous content
+
+      selectedCoupons.forEach((checkbox) => {
+        const coupon = checkbox.closest(".coupon").cloneNode(true);
+        coupon.querySelector("input").remove(); // Remove checkbox
+        printContainer.appendChild(coupon);
+      });
+
+      // Open print dialog
+      const originalContent = document.body.innerHTML;
+      const printContent = printContainer.innerHTML;
+      document.body.innerHTML = printContent;
+      window.print();
+      document.body.innerHTML = originalContent;
+      window.location.reload();
+    }
+
     document.addEventListener("DOMContentLoaded", fetchCoupons);
   </script>
   <!-- Load script.js here as a final fallback -->
   <script src="js/script.js" defer></script>
-  
+
 </body>
+
 </html>
